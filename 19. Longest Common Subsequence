@@ -1,0 +1,16 @@
+#include <stdio.h>
+char s1[100], s2[100];
+int n, m, dp[101][101];
+int main() {
+scanf("%s %s", s1, s2);
+n = 0; while (s1[n]) n++;
+m = 0; while (s2[m]) m++;
+for (int i = 0; i <= n; i++)
+for (int j = 0; j <= m; j++) {
+if (i == 0 || j == 0) dp[i][j] = 0;
+else if (s1[i-1] == s2[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
+else dp[i][j] = (dp[i-1][j] > dp[i][j-1]) ? dp[i-1][j] : dp[i][j-1];
+}
+printf("%d\n", dp[n][m]);
+return 0;
+}
